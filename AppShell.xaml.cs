@@ -20,6 +20,11 @@ namespace PowerQualityMonitor_NetMetering
                 MyAppShell.CurrentItem = MyLoginPage;
 
             }
+
+            Routing.RegisterRoute(nameof(SignupPage), typeof(SignupPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(Settings), typeof(Settings));
+            Routing.RegisterRoute(nameof(DashboardPage), typeof(DashboardPage));
         }
     }
 }

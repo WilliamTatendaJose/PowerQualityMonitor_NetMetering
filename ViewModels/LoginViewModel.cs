@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using PowerQualityMonitor_NetMetering.Models;
+using PowerQualityMonitor_NetMetering.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,19 +12,20 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
     public partial class LoginViewModel: BaseViewModel
     {
      
-        public ObservableCollection<LoginRequestModel> Login { get; set; } = new ();
+            
+        public LoginRequestModel login { get; set; }
         public LoginViewModel()
         {
-            Title = "LoginPage";
+            Title = "Welcome";
         }
 
         [RelayCommand]
         async Task GotoSignup()
         {
-            await Shell.Current.GoToAsync(state: "//SignupPage");
+            await Shell.Current.GoToAsync(nameof(SignupPage));
         }
         [RelayCommand]
-        async Task loginUser(LoginRequestModel loginRequest)
+        async Task LoginUser(LoginRequestModel loginRequest)
         {
             //code to implement login 
             var data = loginRequest;
