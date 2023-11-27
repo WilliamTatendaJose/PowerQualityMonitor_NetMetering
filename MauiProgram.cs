@@ -29,6 +29,7 @@ namespace PowerQualityMonitor_NetMetering
             builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<Settings>();
+            builder.Services.AddTransient<LogPage>();
 
             return builder.Build();
         }

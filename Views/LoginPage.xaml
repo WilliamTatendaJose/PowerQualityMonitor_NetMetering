@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PowerQualityMonitor_NetMetering.Views.LoginPage"
-             
-             Title="Welcome"
-             NavigationPage.HasNavigationBar="False">
+<ContentPage
+    x:Class="PowerQualityMonitor_NetMetering.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:PowerQualityMonitor_NetMetering.Models"
+    xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewModel:LoginViewModel">
 
     <ContentPage.Content>
+
         <Grid
-            BackgroundColor="#1C375C"
+            BackgroundColor="{StaticResource Primary}"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -27,7 +30,7 @@
             <Frame
                 Grid.Row="1"
                 Margin="0,0,0,-70"
-                BorderColor="#1C375C"
+                BorderColor="{StaticResource Tertiary}"
                 CornerRadius="60"
                 HasShadow="True"
                 HeightRequest="700">
@@ -53,49 +56,76 @@
                         FontSize="24"
                         HorizontalOptions="CenterAndExpand"
                         Text="Welcome!"
-                        TextColor="#1C375C" />
+                        TextColor="{StaticResource Primary}" />
                     <Label
                         Grid.Row="1"
                         Margin="0,-15,0,0"
                         HorizontalOptions="CenterAndExpand"
                         Text="Login in to account"
-                        TextColor="#1C375C" />
+                        TextColor="{StaticResource Tertiary}" />
+
+
                     <Entry
                         Grid.Row="2"
                         Margin="0,20,0,0"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Username"
-                        Text="{Binding UserName}"
+                        Text="{Binding login.Username}"
                         VerticalOptions="FillAndExpand" />
                     <Entry
                         Grid.Row="3"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
                         Placeholder="Password"
-                        Text="{Binding UserPassword}"
+                        Text="{Binding login.Password}"
                         VerticalOptions="FillAndExpand" />
+
+
+
+
+
                     <Button
                         Grid.Row="4"
-                        BackgroundColor="#1C375C"
-                        Command="{Binding LoginBtn}"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        Command="{Binding LoginUserCommand}"
                         CornerRadius="20"
                         Text="Login" />
 
                     <Button
                         Grid.Row="5"
-                        BackgroundColor="#1C375C"
-                        Command="{Binding RegisterBtn}"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        Command="{Binding GotoSignupCommand}"
                         CornerRadius="20"
-                        Text="Register using Email" />
+                        Text="Register" />
 
+
+                    
 
                     <Label
                         Grid.Row="7"
                         FontAttributes="Bold"
                         HorizontalOptions="CenterAndExpand"
-                        Text="Forget Password?" />
+                        Text="Forget Password?">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+
+
                 </Grid>
             </Frame>
+
+
+            <ActivityIndicator
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Fill"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center"
+                Color="{StaticResource Primary}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
