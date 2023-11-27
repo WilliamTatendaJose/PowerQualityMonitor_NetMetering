@@ -25,13 +25,20 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
             await Shell.Current.GoToAsync(nameof(SignupPage));
         }
         [RelayCommand]
-        async Task LoginUser(LoginRequestModel loginRequest)
+        async Task ForgotPassword()
+        {
+            await Shell.Current.GoToAsync(nameof(ForgotPassword));
+        }
+        [RelayCommand]
+        public async Task LoginUser(LoginRequestModel loginRequest)
         {
             //code to implement login 
             var data = loginRequest;
 
 
             Preferences.Set("UserAlreadyloggedIn", true);
+            Application.Current.MainPage = new AppShell();
+
 
 
             await Shell.Current.GoToAsync(state: "//DashboardPage");

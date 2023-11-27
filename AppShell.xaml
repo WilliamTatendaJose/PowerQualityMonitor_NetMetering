@@ -5,16 +5,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PowerQualityMonitor_NetMetering"
     xmlns:myLogin="clr-namespace:PowerQualityMonitor_NetMetering.Views"
-    Shell.FlyoutBehavior="Disabled"
-    x:Name="MyAppShell">
+    x:Name="MyAppShell"
+    Shell.FlyoutBehavior="Disabled">
 
-    <FlyoutItem Route="Login" x:Name="MyLoginPage">
-        <ShellContent ContentTemplate="{DataTemplate myLogin:LoginPage}"/>
-    </FlyoutItem>
 
-    <ShellContent  x:Name="MyDashboardPage"
-      Title="DashboardPage"
-      ContentTemplate="{DataTemplate myLogin:DashboardPage}"
-      Route="DashboardPage"/>
+
+    <ShellContent
+        x:Name="MyDashboardPage"
+        Title="DashboardPage"
+        ContentTemplate="{DataTemplate myLogin:DashboardPage}"
+        Route="DashboardPage">
+
+
+        <TabBar>
+            <Tab Title="Home" Icon="dotnet_bot.svg">
+                <ShellContent ContentTemplate="{DataTemplate myLogin:DashboardPage}" />
+            </Tab>
+            <Tab Title="Settings" Icon="control_panel.svg">
+                <ShellContent ContentTemplate="{DataTemplate myLogin:Settings}" />
+            </Tab>
+            <Tab Title="History" Icon="users.svg">
+                <ShellContent ContentTemplate="{DataTemplate myLogin:LogPage}" />
+            </Tab>
+        </TabBar>
+    </ShellContent>
+
+
+    <ShellContent
+        x:Name="MyLoginPage"
+        Title="LoginPage"
+        ContentTemplate="{DataTemplate myLogin:LoginPage}"
+        Route="Login" />
+
+
 
 </Shell>

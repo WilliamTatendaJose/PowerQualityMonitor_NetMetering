@@ -17,7 +17,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         }
 
         [RelayCommand]
-        async Task RegisterNewUser(RegisterUserModel registerUser)
+        public async Task RegisterNewUser(RegisterUserModel registerUser)
         {
 
 

@@ -26,13 +26,13 @@
             FontSize="24"
             HorizontalOptions="CenterAndExpand"
             Text="Registration"
-            TextColor="#1C375C" />
+            TextColor="{StaticResource Tertiary}" />
         <Label
             Grid.Row="1"
             Margin="0,-15,0,0"
             HorizontalOptions="CenterAndExpand"
             Text="Register With Email"
-            TextColor="#1C375C" />
+            TextColor="{StaticResource Tertiary}" />
         <Entry
             Grid.Row="2"
             Margin="0,20,0,0"
@@ -56,7 +56,7 @@
             VerticalOptions="FillAndExpand" />
         <Button
             Grid.Row="5"
-            BackgroundColor="#1C375C"
+            BackgroundColor="{StaticResource Tertiary}"
             Command="{Binding RegisterNewUserCommand}"
             CornerRadius="20"
             Text="Register" />

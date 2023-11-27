@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:PowerQualityMonitor_NetMetering.Models"
     xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
-    x:DataType="viewModel:LoginViewModel"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    x:DataType="viewModel:LoginViewModel">
 
     <ContentPage.Content>
-        
+
         <Grid
-            BackgroundColor="#1C375C"
+            BackgroundColor="{StaticResource Primary}"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -28,10 +28,9 @@
             </StackLayout>
 
             <Frame
-             
                 Grid.Row="1"
                 Margin="0,0,0,-70"
-                BorderColor="#1C375C"
+                BorderColor="{StaticResource Tertiary}"
                 CornerRadius="60"
                 HasShadow="True"
                 HeightRequest="700">
@@ -57,24 +56,23 @@
                         FontSize="24"
                         HorizontalOptions="CenterAndExpand"
                         Text="Welcome!"
-                        TextColor="#1C375C" />
+                        TextColor="{StaticResource Primary}" />
                     <Label
                         Grid.Row="1"
                         Margin="0,-15,0,0"
                         HorizontalOptions="CenterAndExpand"
                         Text="Login in to account"
-                        TextColor="#1C375C" />
-              
-                      
-                        <Entry
+                        TextColor="{StaticResource Tertiary}" />
+
+
+                    <Entry
                         Grid.Row="2"
                         Margin="0,20,0,0"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Username"
                         Text="{Binding login.Username}"
                         VerticalOptions="FillAndExpand" />
-                        <Entry
-                      
+                    <Entry
                         Grid.Row="3"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
@@ -82,30 +80,40 @@
                         Text="{Binding login.Password}"
                         VerticalOptions="FillAndExpand" />
 
-                 
+
 
 
 
                     <Button
                         Grid.Row="4"
-                        BackgroundColor="#1C375C"
+                        BackgroundColor="{StaticResource Tertiary}"
                         Command="{Binding LoginUserCommand}"
                         CornerRadius="20"
                         Text="Login" />
 
                     <Button
                         Grid.Row="5"
-                        BackgroundColor="#1C375C"
+                        BackgroundColor="{StaticResource Tertiary}"
                         Command="{Binding GotoSignupCommand}"
                         CornerRadius="20"
                         Text="Register" />
 
 
+                    
+
                     <Label
                         Grid.Row="7"
                         FontAttributes="Bold"
                         HorizontalOptions="CenterAndExpand"
-                        Text="Forget Password?" />
+                        Text="Forget Password?">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+
+
                 </Grid>
             </Frame>
 
