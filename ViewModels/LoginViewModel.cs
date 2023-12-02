@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
 using PowerQualityMonitor_NetMetering.Models;
 using PowerQualityMonitor_NetMetering.Views;
 using System;
@@ -13,7 +14,9 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
     {
      
             
-        public LoginRequestModel Login { get; set; }
+        private UserModel Login { get; set; }
+        private readonly FirebaseAuthClient _authClient;
+       
         public LoginViewModel()
         {
             Title = "Welcome";
@@ -49,10 +52,10 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
         }
         [RelayCommand]
-        public async Task LoginUser(LoginRequestModel loginRequest)
+        public async Task LoginUser(UserModel Login, FirebaseAuthClient authClient)
         {
             //code to implement login 
-            var data = loginRequest;
+            
 
 
             Preferences.Set("UserAlreadyloggedIn", true);

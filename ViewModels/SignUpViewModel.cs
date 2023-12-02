@@ -13,7 +13,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
     partial class SignUpViewModel: BaseViewModel
 
     {
-        public RegisterUserModel RegisterUser { get; set; }
+        private UserModel RegisterUser { get; set; }
         private readonly FirebaseAuthClient _authClient;
         public SignUpViewModel()
         {
@@ -22,7 +22,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         }
 
         [RelayCommand]
-        public async Task RegisterNewUser(RegisterUserModel registerUser, FirebaseAuthClient _authClient)
+        public async Task RegisterNewUser(UserModel registerUser, FirebaseAuthClient _authClient)
 
         {
 
