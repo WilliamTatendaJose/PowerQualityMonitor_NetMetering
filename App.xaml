@@ -3,7 +3,8 @@
     x:Class="PowerQualityMonitor_NetMetering.App"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:PowerQualityMonitor_NetMetering">
+    xmlns:local="clr-namespace:PowerQualityMonitor_NetMetering"
+     xmlns:myLogin="clr-namespace:PowerQualityMonitor_NetMetering.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,4 +13,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+   
+
 </Application>

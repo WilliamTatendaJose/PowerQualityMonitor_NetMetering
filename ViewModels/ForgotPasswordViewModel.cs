@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PowerQualityMonitor_NetMetering.ViewModels
 {
-    internal class ForgotPasswordViewModel
+    public partial class ForgotPasswordViewModel: BaseViewModel
     {
+        public ForgotPasswordViewModel() 
+        {
+            Title = "Forgot Password?";
+        }
     }
 }

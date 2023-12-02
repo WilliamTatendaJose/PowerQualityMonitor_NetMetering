@@ -1,12 +1,99 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PowerQualityMonitor_NetMetering.Views.Settings"
-             Title="Settings">
+<ContentPage
+    x:Class="PowerQualityMonitor_NetMetering.Views.Settings"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:PowerQualityMonitor_NetMetering.Models"
+    xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
+    Title="{Binding Title}"
+    x:DataType="viewModel:SettingsViewModel">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Image
+                    Grid.Row="0"
+                    HeightRequest="120"
+                    Source="dotnet_bot.png"
+                    WidthRequest="120" />
+                <VerticalStackLayout Margin="20" Padding="10">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="User Details"
+                        TextColor="Black" />
+                    <Label
+                        FontAttributes="None"
+                        FontSize="16"
+                        Text="Name:William Jose"
+                        TextColor="Black" />
+                    <Label
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        Text="SerialNum:1234578R26"
+                        TextColor="Black" />
+
+
+
+
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+            <Frame
+                Grid.Row="2"
+                Margin="30,10,30,0"
+                HeightRequest="150"
+                VerticalOptions="Center">
+                <StackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="About"
+                        TextColor="Black" />
+                    <Label
+                        FontAttributes="Italic"
+                        FontSize="14"
+                        LineBreakMode="WordWrap"
+                        Text="This Application was develped as part of a final year project in partial fulfilment of a bachelor of enginering degree in Electronic engineering by William Jose"
+                        TextColor="Black" />
+
+                </StackLayout>
+
+            </Frame>
+
+            <HorizontalStackLayout
+                Grid.Row="4"
+                Margin="20,20,20,20"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="10">
+                <Button
+                    BackgroundColor="#2eb82e"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    Command="{Binding SignOutCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Sign Out"
+                    TextColor="White" />
+                <Button
+                    BackgroundColor="#2eb82e"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    Command="{Binding ChangeDeviceCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Change Device"
+                    TextColor="White" />
+            </HorizontalStackLayout>
+
+        </Grid>
+
+
     </VerticalStackLayout>
+
 </ContentPage>

@@ -13,7 +13,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
     {
      
             
-        public LoginRequestModel login { get; set; }
+        public LoginRequestModel Login { get; set; }
         public LoginViewModel()
         {
             Title = "Welcome";
@@ -22,12 +22,31 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         [RelayCommand]
         async Task GotoSignup()
         {
-            await Shell.Current.GoToAsync(nameof(SignupPage));
+            if (Shell.Current != null)
+            {
+                
+                await Shell.Current.GoToAsync(nameof(SignupPage));
+            }
+            else
+            {
+                Console.WriteLine("Shell.Current is null");
+            }
+
         }
+
         [RelayCommand]
-        async Task ForgotPassword()
+        async Task GotoForgotPassword()
         {
-            await Shell.Current.GoToAsync(nameof(ForgotPassword));
+            if (Shell.Current != null)
+            {
+               
+                await Shell.Current.GoToAsync("ForgotPassword") ;
+            }
+            else
+            {
+                Console.WriteLine("Shell.Current is null");
+            }
+
         }
         [RelayCommand]
         public async Task LoginUser(LoginRequestModel loginRequest)

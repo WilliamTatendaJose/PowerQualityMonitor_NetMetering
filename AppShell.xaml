@@ -5,37 +5,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PowerQualityMonitor_NetMetering"
     xmlns:myLogin="clr-namespace:PowerQualityMonitor_NetMetering.Views"
-    x:Name="MyAppShell"
-    Shell.FlyoutBehavior="Disabled">
+    x:Name="MyAppShell">
 
 
 
     <ShellContent
-        x:Name="MyDashboardPage"
-        Title="DashboardPage"
-        ContentTemplate="{DataTemplate myLogin:DashboardPage}"
-        Route="DashboardPage">
+   
+    Title="SignupPage"
+    ContentTemplate="{DataTemplate myLogin:SignupPage}"
+    Route="SignupPage"
+    Shell.TabBarIsVisible="False" />
+    <ShellContent
+   
+    Title="ForgotPassword"
+    ContentTemplate="{DataTemplate myLogin:ForgotPassword}"
+    Route="ForgotPassword"
+    Shell.TabBarIsVisible="False" />
 
 
-        <TabBar>
-            <Tab Title="Home" Icon="dotnet_bot.svg">
-                <ShellContent ContentTemplate="{DataTemplate myLogin:DashboardPage}" />
-            </Tab>
-            <Tab Title="Settings" Icon="control_panel.svg">
-                <ShellContent ContentTemplate="{DataTemplate myLogin:Settings}" />
-            </Tab>
-            <Tab Title="History" Icon="users.svg">
-                <ShellContent ContentTemplate="{DataTemplate myLogin:LogPage}" />
-            </Tab>
-        </TabBar>
-    </ShellContent>
+
+    <TabBar>
+        <Tab Title="Home" Icon="dotnet_bot">
+            <ShellContent
+                x:Name="MyDashboardPage"
+                ContentTemplate="{DataTemplate myLogin:DashboardPage}"
+                Route="DashboardPage"
+                Shell.TabBarIsVisible="True" />
+        </Tab>
+      
+        <Tab Title="History" Icon="users">
+            <ShellContent ContentTemplate="{DataTemplate myLogin:LogPage}" Shell.TabBarIsVisible="True" />
+        </Tab>
+        <Tab Title="Settings" Icon="control_panel">
+            <ShellContent ContentTemplate="{DataTemplate myLogin:Settings}" Shell.TabBarIsVisible="True" />
+        </Tab>
+    </TabBar>
+
+
 
 
     <ShellContent
         x:Name="MyLoginPage"
         Title="LoginPage"
         ContentTemplate="{DataTemplate myLogin:LoginPage}"
-        Route="Login" />
+        Route="Login"
+        Shell.TabBarIsVisible="False" />
+   
 
 
 

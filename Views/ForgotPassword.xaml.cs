@@ -5,7 +5,8 @@ public partial class ForgotPassword : ContentPage
 {
 	public ForgotPassword()
 	{
-		InitializeComponent();
+		
 		BindingContext = new ForgotPasswordViewModel();
-	}
+        InitializeComponent();
+    }
 }

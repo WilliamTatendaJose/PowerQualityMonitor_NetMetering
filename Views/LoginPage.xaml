@@ -6,7 +6,11 @@
     xmlns:model="clr-namespace:PowerQualityMonitor_NetMetering.Models"
     xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
     Title="{Binding Title}"
-    x:DataType="viewModel:LoginViewModel">
+    x:DataType="viewModel:LoginViewModel"
+    Shell.TabBarIsVisible="False" >
+<Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"  />
+    </Shell.BackButtonBehavior>
 
     <ContentPage.Content>
 
@@ -70,14 +74,14 @@
                         Margin="0,20,0,0"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Username"
-                        Text="{Binding login.Username}"
+                        Text="{Binding Login.Username}"
                         VerticalOptions="FillAndExpand" />
                     <Entry
                         Grid.Row="3"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
                         Placeholder="Password"
-                        Text="{Binding login.Password}"
+                        Text="{Binding Login.Password}"
                         VerticalOptions="FillAndExpand" />
 
 
@@ -108,7 +112,7 @@
                         Text="Forget Password?">
 
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                            <TapGestureRecognizer Command="{Binding GotoForgotPasswordCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
 

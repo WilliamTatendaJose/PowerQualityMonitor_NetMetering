@@ -6,7 +6,8 @@
     xmlns:model="clr-namespace:PowerQualityMonitor_NetMetering.Models"
     xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
     x:DataType="viewModel:SignUpViewModel"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    Shell.TabBarIsVisible="False" >
     <Grid
         Padding="20,50,20,0"
         HorizontalOptions="FillAndExpand"
