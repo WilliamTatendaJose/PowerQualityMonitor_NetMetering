@@ -65,7 +65,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Alert","Failed to Log In try again later", "OK");
                 throw;
             }
 

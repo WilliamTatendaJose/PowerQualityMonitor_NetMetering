@@ -50,7 +50,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Alert","Failed to register please try again later", "OK");
                 throw;
             }
         }
