@@ -1,5 +1,4 @@
-﻿using Firebase.Auth.Providers;
-using Firebase.Auth.Repository;
+﻿
 using Firebase.Auth;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
@@ -39,16 +38,7 @@ namespace PowerQualityMonitor_NetMetering
             builder.Services.AddTransient<LogsViewModel>();
             builder.Services.AddTransient<ForgotPasswordViewModel>();
             builder.Services.AddTransient<ForgotPassword>();
-            builder.Services.AddSingleton(services => new FirebaseAuthClient(new FirebaseAuthConfig()
-            {
-                ApiKey = "AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk",
-                AuthDomain = "",
-                Providers = new FirebaseAuthProvider[]
-                {
-                    new EmailProvider()
-                },
-                UserRepository = services.GetRequiredService<IUserRepository>()
-            }));
+          
 
             return builder.Build();
         }

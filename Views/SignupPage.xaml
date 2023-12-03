@@ -12,6 +12,7 @@
         Padding="20,50,20,0"
         HorizontalOptions="FillAndExpand"
         RowSpacing="20"
+        MaximumWidthRequest="800"
         VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -10,41 +10,49 @@ using System.Threading.Tasks;
 
 namespace PowerQualityMonitor_NetMetering.ViewModels
 {
-    partial class SignUpViewModel: BaseViewModel
-
+    partial class SignUpViewModel : BaseViewModel
     {
-        private UserModel RegisterUser { get; set; }
-        private readonly FirebaseAuthClient _authClient;
+        public UserModel RegisterUser { get; set; }
+
+        private string webApiKey = "AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk";
+        private INavigation Navigation {  get; set; }
+
         public SignUpViewModel()
         {
-            Title = "Register";
             
         }
 
-        [RelayCommand]
-        public async Task RegisterNewUser(UserModel registerUser, FirebaseAuthClient _authClient)
-
+        public SignUpViewModel(INavigation navigation)
         {
+            Navigation = navigation;
 
-            if (registerUser.Password != registerUser.ConfirmPassword)
+            Title = "Register";
+            RegisterUser = new UserModel();
+        }
+
+        [RelayCommand]
+        public async Task RegisterNewUser(UserModel registerUser)
+        {
+            if(RegisterUser.Password != RegisterUser.ConfirmPassword)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Password and confirm password values do not match.", "Ok");
-                return;
-            }
 
+                await App.Current.MainPage.DisplayAlert("Alert", "Passwords do not match", "OK");
+            }
             try
             {
-                await _authClient.CreateUserWithEmailAndPasswordAsync(registerUser.Email, registerUser.Password);
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
+                var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(RegisterUser.Email, RegisterUser.Password);
+                string token = auth.FirebaseToken;
+                if (token != null)
+                    await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
+                await Navigation.PopAsync();
 
-                await Application.Current.MainPage.DisplayAlert("Success", "Successfully signed up!", "Ok");
-
-                await Shell.Current.GoToAsync(nameof(LoginPage));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Failed to sign up. Please try again later.", "Ok");
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                throw;
             }
-
         }
     }
 }

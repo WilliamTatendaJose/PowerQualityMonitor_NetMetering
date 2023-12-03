@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+
+using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
 using PowerQualityMonitor_NetMetering.Models;
 using PowerQualityMonitor_NetMetering.Views;
 using System;
@@ -8,70 +11,65 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace PowerQualityMonitor_NetMetering.ViewModels
 {
-    public partial class LoginViewModel: BaseViewModel
+    public partial class LoginViewModel : BaseViewModel
     {
-     
-            
-        private UserModel Login { get; set; }
-        private readonly FirebaseAuthClient _authClient;
+        public UserModel Login { get; set; }
+        public INavigation Navigation { get; }
+
+        
+        private string webApiKey ="AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk";
+
        
-        public LoginViewModel()
+        public LoginViewModel(INavigation navigation)
         {
+            Navigation = navigation;
             Title = "Welcome";
+            Login = new UserModel();
         }
 
         [RelayCommand]
         async Task GotoSignup()
         {
-            if (Shell.Current != null)
-            {
-                
-                await Shell.Current.GoToAsync(nameof(SignupPage));
-            }
-            else
-            {
-                Console.WriteLine("Shell.Current is null");
-            }
+            
+                await Navigation.PushAsync(new SignupPage());
 
+           
         }
 
         [RelayCommand]
         async Task GotoForgotPassword()
         {
-            if (Shell.Current != null)
-            {
-               
-                await Shell.Current.GoToAsync("ForgotPassword") ;
-            }
-            else
-            {
-                Console.WriteLine("Shell.Current is null");
-            }
-
+            await Navigation.PushAsync(new ForgotPassword());
         }
+
         [RelayCommand]
-        public async Task LoginUser(UserModel Login, FirebaseAuthClient authClient)
+        public async Task LoginUser()
         {
-            //code to implement login 
-            
 
+           
 
-            Preferences.Set("UserAlreadyloggedIn", true);
-            Application.Current.MainPage = new AppShell();
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
+            try
+            {
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(Login.Email, Login.Password);
+                var content = await auth.GetFreshAuthAsync();
+                var serializedContent = JsonConvert.SerializeObject(content);
+                Preferences.Set("FreshFirebaseToken", serializedContent);
+                Preferences.Set("UserAlreadyloggedIn", true);
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync(state: "//DashboardPage");
 
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                throw;
+            }
 
-
-            await Shell.Current.GoToAsync(state: "//DashboardPage");
 
         }
-
-
-
-
-
-
-
     }
 }
