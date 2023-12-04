@@ -38,21 +38,30 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
                 await App.Current.MainPage.DisplayAlert("Alert", "Passwords do not match", "OK");
             }
-            try
+            else if (RegisterUser is null)
             {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
-                var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(RegisterUser.Email, RegisterUser.Password);
-                string token = auth.FirebaseToken;
-                if (token != null)
-                    await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
-                await Navigation.PopAsync();
+                await App.Current.MainPage.DisplayAlert("Alert","Please fill in all details ", "OK");
+            }
+            else
+            {
+                try
+                {
+                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
+                    var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(RegisterUser.Email, RegisterUser.Password);
+                    string token = auth.FirebaseToken;
+                    if (token != null)
+                        await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
+                    await Navigation.PopAsync();
+
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Alert", "Failed to register please try again later", "OK");
+                  
+                }
 
             }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Alert","Failed to register please try again later", "OK");
-                throw;
-            }
+           
         }
     }
 }

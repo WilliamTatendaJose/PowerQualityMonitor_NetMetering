@@ -48,26 +48,33 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         [RelayCommand]
         public async Task LoginUser()
         {
+            if (Login.Email is null || Login.Password is null)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Please Fill in all details", "OK");
+            }
+            else
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
+                try
+                {
+                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(Login.Email, Login.Password);
+                    var content = await auth.GetFreshAuthAsync();
+                    var serializedContent = JsonConvert.SerializeObject(content);
+                    Preferences.Set("FreshFirebaseToken", serializedContent);
+                    Preferences.Set("UserAlreadyloggedIn", true);
+                    Application.Current.MainPage = new AppShell();
+                    await Shell.Current.GoToAsync(state: "//DashboardPage");
 
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Alert", "Failed to Log In try again later", "OK");
+
+                }
+            }
            
 
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
-            try
-            {
-                var auth = await authProvider.SignInWithEmailAndPasswordAsync(Login.Email, Login.Password);
-                var content = await auth.GetFreshAuthAsync();
-                var serializedContent = JsonConvert.SerializeObject(content);
-                Preferences.Set("FreshFirebaseToken", serializedContent);
-                Preferences.Set("UserAlreadyloggedIn", true);
-                Application.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync(state: "//DashboardPage");
-
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Alert","Failed to Log In try again later", "OK");
-                throw;
-            }
+           
 
 
         }
