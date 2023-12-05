@@ -33,7 +33,7 @@
                 Shell.TabBarIsVisible="True" />
         </Tab>
       
-        <Tab Title="History" Icon="users">
+        <Tab Title="History" Icon="enapter_cloud">
             <ShellContent ContentTemplate="{DataTemplate myLogin:LogPage}" Shell.TabBarIsVisible="True" />
         </Tab>
         <Tab Title="Settings" Icon="control_panel">

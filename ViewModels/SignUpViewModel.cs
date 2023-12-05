@@ -38,7 +38,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
                 await App.Current.MainPage.DisplayAlert("Alert", "Passwords do not match", "OK");
             }
-            else if (RegisterUser is null)
+            else if (RegisterUser.Email is null|| RegisterUser.Password is null || RegisterUser.ConfirmPassword is null)
             {
                 await App.Current.MainPage.DisplayAlert("Alert","Please fill in all details ", "OK");
             }
@@ -46,10 +46,12 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
             {
                 try
                 {
+                    IsBusy = true;
                     var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
                     var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(RegisterUser.Email, RegisterUser.Password);
                     string token = auth.FirebaseToken;
                     if (token != null)
+                        IsBusy = false;
                         await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
                     await Navigation.PopAsync();
 
@@ -57,7 +59,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
                 catch (Exception ex)
                 {
                     await App.Current.MainPage.DisplayAlert("Alert", "Failed to register please try again later", "OK");
-                  
+                    IsBusy = false;
                 }
 
             }

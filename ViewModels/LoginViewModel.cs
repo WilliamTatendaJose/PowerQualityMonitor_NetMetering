@@ -57,12 +57,16 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
                 try
                 {
+                    IsBusy= true;
                     var auth = await authProvider.SignInWithEmailAndPasswordAsync(Login.Email, Login.Password);
                     var content = await auth.GetFreshAuthAsync();
                     var serializedContent = JsonConvert.SerializeObject(content);
                     Preferences.Set("FreshFirebaseToken", serializedContent);
                     Preferences.Set("UserAlreadyloggedIn", true);
-                    Application.Current.MainPage = new AppShell();
+                    
+                    if (serializedContent != null)
+                        Application.Current.MainPage = new AppShell();
+                    IsBusy= false;
                     await Shell.Current.GoToAsync(state: "//DashboardPage");
 
                 }
