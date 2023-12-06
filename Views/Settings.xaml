@@ -8,7 +8,7 @@
     Title="{Binding Title}"
     x:DataType="viewModel:SettingsViewModel">
     <VerticalStackLayout>
-        <Grid>
+        <Grid RowSpacing="10" VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -38,13 +38,29 @@
                         FontSize="16"
                         Text="SerialNum:1234578R26"
                         TextColor="Black" />
-
-
-
-
-
                 </VerticalStackLayout>
 
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                Grid.Row="1"
+                Padding="10"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="10">
+                <Entry
+                    Grid.Row="1"
+                    Margin="0"
+                    HorizontalOptions="Fill"
+                    IsEnabled="{Binding ChangeDeviceId}"
+                    Placeholder="Enter Device ID"
+                    Text="{Binding User.DeviceId}"
+                    VerticalOptions="FillAndExpand" />
+                <Button
+                    BackgroundColor="#2eb82e"
+                    Command="{Binding ChangeDeviceCommand}"
+                    CornerRadius="20"
+                    Text="{Binding ButtonText}"
+                    TextColor="White" />
             </HorizontalStackLayout>
             <Frame
                 Grid.Row="2"
@@ -68,28 +84,20 @@
 
             </Frame>
 
-            <HorizontalStackLayout
+
+
+            <Button
                 Grid.Row="4"
-                Margin="20,20,20,20"
-                HorizontalOptions="CenterAndExpand"
-                Spacing="10">
-                <Button
-                    BackgroundColor="#2eb82e"
-                    BorderColor="White"
-                    BorderWidth="1"
-                    Command="{Binding SignOutCommand}"
-                    HorizontalOptions="FillAndExpand"
-                    Text="Sign Out"
-                    TextColor="White" />
-                <Button
-                    BackgroundColor="#2eb82e"
-                    BorderColor="White"
-                    BorderWidth="1"
-                    Command="{Binding ChangeDeviceCommand}"
-                    HorizontalOptions="FillAndExpand"
-                    Text="Change Device"
-                    TextColor="White" />
-            </HorizontalStackLayout>
+                Padding="10"
+                BackgroundColor="#2eb82e"
+                Command="{Binding SignOutCommand}"
+                CornerRadius="20"
+                Text="Sign Out"
+                TextColor="White"
+                HorizontalOptions="FillAndExpand"
+                MaximumWidthRequest="350"/>
+
+
 
         </Grid>
 

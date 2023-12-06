@@ -11,5 +11,6 @@ namespace PowerQualityMonitor_NetMetering.Models
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Email { get; set; }
+        public string DeviceId { get; set; }
     }
 }

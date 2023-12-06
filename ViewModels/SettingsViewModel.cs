@@ -1,8 +1,11 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using PowerQualityMonitor_NetMetering.Models;
 using PowerQualityMonitor_NetMetering.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +16,22 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
     {
         private string webApiKey = "AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk";
+        int count = 0;
+        [ObservableProperty]
+        public bool changeDeviceId;
+        public UserModel User {  get; set; }
+        [ObservableProperty]
+        public string buttonText;
         public SettingsViewModel()
         {
             Title = "Settings";
+            User = new UserModel();
+            ButtonText = "Change Device";
+            ChangeDeviceId = false;
         }
 
         [RelayCommand]
-        async Task SignOut()
+        static async Task SignOut()
         {
 
           
@@ -46,7 +58,28 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         [RelayCommand]
         async Task ChangeDevice()
         {
+           
+                ChangeDeviceId = true;
+                ButtonText = "Save Device Id";
+               
+           
+                if (User.DeviceId != null)
+                {
+                  
+                    await App.Current.MainPage.DisplayAlert("Success", "Device ID Saved", "OK");
+                    ButtonText = "Change Device";
+                    ChangeDeviceId = false;
+                    
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Alert", "Enter a valid Device ID", "OK");
+                }
+              
+              
 
+              
+            
         }
 
 

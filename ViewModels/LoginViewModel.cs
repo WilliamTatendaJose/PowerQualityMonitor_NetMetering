@@ -72,6 +72,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    IsBusy= false;
                     await App.Current.MainPage.DisplayAlert("Alert", "Failed to Log In try again later", "OK");
 
                 }

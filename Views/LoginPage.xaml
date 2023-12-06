@@ -7,9 +7,9 @@
     xmlns:viewModel="clr-namespace:PowerQualityMonitor_NetMetering.ViewModels"
     Title="{Binding Title}"
     x:DataType="viewModel:LoginViewModel"
-    Shell.TabBarIsVisible="False" >
-<Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="False" IsVisible="False"  />
+    Shell.TabBarIsVisible="False">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
 
     <ContentPage.Content>
@@ -37,8 +37,8 @@
                 BorderColor="{StaticResource Tertiary}"
                 CornerRadius="60"
                 HasShadow="True"
-                MaximumWidthRequest="800"
-                HeightRequest="700">
+                HeightRequest="700"
+                MaximumWidthRequest="800">
                 <Grid
                     Padding="20,50,20,0"
                     HorizontalOptions="FillAndExpand"
@@ -104,7 +104,7 @@
                         Text="Register" />
 
 
-                    
+
 
                     <Label
                         Grid.Row="7"
@@ -116,6 +116,14 @@
                             <TapGestureRecognizer Command="{Binding GotoForgotPasswordCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
+                    <ActivityIndicator
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Fill"
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        VerticalOptions="Center"
+                        Color="{StaticResource Primary}" />
 
 
 
@@ -123,14 +131,7 @@
             </Frame>
 
 
-            <ActivityIndicator
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalOptions="Fill"
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                Color="{StaticResource Primary}" />
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

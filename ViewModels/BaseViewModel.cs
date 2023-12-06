@@ -15,6 +15,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
         [ObservableProperty]
         string title;
+     
 
         public bool IsNotBusy => !IsBusy;
     }
