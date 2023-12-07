@@ -33,13 +33,8 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         [RelayCommand]
         static async Task SignOut()
         {
-
-          
                 try
                 {
-
-               
-
 
                     Preferences.Set("UserAlreadyloggedIn", false);
                     Application.Current.MainPage = new LoginPage();
@@ -58,27 +53,31 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
         [RelayCommand]
         async Task ChangeDevice()
         {
-           
+            count++;
+            if(count== 1)
+            {
                 ChangeDeviceId = true;
                 ButtonText = "Save Device Id";
-               
-           
+
+            }
+
+            if(count== 2)
+            {
                 if (User.DeviceId != null)
                 {
-                  
+
                     await App.Current.MainPage.DisplayAlert("Success", "Device ID Saved", "OK");
                     ButtonText = "Change Device";
                     ChangeDeviceId = false;
-                    
+
                 }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("Alert", "Enter a valid Device ID", "OK");
                 }
-              
-              
+                count = 0;
+            }
 
-              
             
         }
 
