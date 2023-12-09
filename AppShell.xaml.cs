@@ -7,6 +7,7 @@ namespace PowerQualityMonitor_NetMetering
         public AppShell()
         {
             InitializeComponent();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF1cWWhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEZiWHxecndQRmVUVUZwWg==");
            
 
             var getuserSavedkey = Preferences.Get("UserAlreadyloggedIn", false);
@@ -14,7 +15,7 @@ namespace PowerQualityMonitor_NetMetering
             if (getuserSavedkey == true)
             {
 
-                
+
                 MyAppShell.CurrentItem = MyDashboardPage;
 
 

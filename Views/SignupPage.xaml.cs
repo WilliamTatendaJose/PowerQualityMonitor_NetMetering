@@ -6,7 +6,8 @@ public partial class SignupPage : ContentPage
 {
 	public SignupPage()
 	{
-		InitializeComponent();
-		BindingContext = new SignUpViewModel();
-	}
+		
+		BindingContext = new SignUpViewModel(Navigation);
+        InitializeComponent();
+    }
 }

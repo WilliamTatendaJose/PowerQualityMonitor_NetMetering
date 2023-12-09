@@ -6,7 +6,8 @@ public partial class DashboardPage : ContentPage
 {
 	public DashboardPage()
 	{
-		InitializeComponent();
-		BindingContext = new DashboardViewModel();	
-	}
+		
+		BindingContext = new DashboardViewModel();
+        InitializeComponent();
+    }
 }

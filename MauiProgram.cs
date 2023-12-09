@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using Firebase.Auth;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using PowerQualityMonitor_NetMetering.ViewModels;
 using PowerQualityMonitor_NetMetering.Views;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace PowerQualityMonitor_NetMetering
 {
@@ -11,6 +15,7 @@ namespace PowerQualityMonitor_NetMetering
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -30,6 +35,10 @@ namespace PowerQualityMonitor_NetMetering
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<Settings>();
             builder.Services.AddTransient<LogPage>();
+            builder.Services.AddTransient<LogsViewModel>();
+            builder.Services.AddTransient<ForgotPasswordViewModel>();
+            builder.Services.AddTransient<ForgotPassword>();
+          
 
             return builder.Build();
         }

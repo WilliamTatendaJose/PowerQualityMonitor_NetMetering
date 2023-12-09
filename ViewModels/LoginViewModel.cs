@@ -1,4 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
+
+using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
 using PowerQualityMonitor_NetMetering.Models;
 using PowerQualityMonitor_NetMetering.Views;
 using System;
@@ -7,49 +11,77 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace PowerQualityMonitor_NetMetering.ViewModels
 {
-    public partial class LoginViewModel: BaseViewModel
+    public partial class LoginViewModel : BaseViewModel
     {
-     
-            
-        public LoginRequestModel login { get; set; }
-        public LoginViewModel()
+        public UserModel Login { get; set; }
+        public INavigation Navigation { get; }
+
+        
+        private string webApiKey ="AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk";
+
+       
+        public LoginViewModel(INavigation navigation)
         {
+            Navigation = navigation;
             Title = "Welcome";
+            Login = new UserModel();
         }
 
         [RelayCommand]
         async Task GotoSignup()
         {
-            await Shell.Current.GoToAsync(nameof(SignupPage));
+            
+                await Navigation.PushAsync(new SignupPage());
+
+           
         }
+
         [RelayCommand]
-        async Task ForgotPassword()
+        async Task GotoForgotPassword()
         {
-            await Shell.Current.GoToAsync(nameof(ForgotPassword));
+            await Navigation.PushAsync(new ForgotPassword());
         }
+
         [RelayCommand]
-        public async Task LoginUser(LoginRequestModel loginRequest)
+        public async Task LoginUser()
         {
-            //code to implement login 
-            var data = loginRequest;
+            if (Login.Email is null || Login.Password is null)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Please Fill in all details", "OK");
+            }
+            else
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(webApiKey));
+                try
+                {
+                    IsBusy= true;
+                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(Login.Email, Login.Password);
+                    var content = await auth.GetFreshAuthAsync();
+                    var serializedContent = JsonConvert.SerializeObject(content);
+                    Preferences.Set("FreshFirebaseToken", serializedContent);
+                    Preferences.Set("UserAlreadyloggedIn", true);
+                    
+                    if (serializedContent != null)
+                        Application.Current.MainPage = new AppShell();
+                    IsBusy= false;
+                    await Shell.Current.GoToAsync(state: "//DashboardPage");
 
+                }
+                catch (Exception ex)
+                {
+                    IsBusy= false;
+                    await App.Current.MainPage.DisplayAlert("Alert", "Failed to Log In try again later", "OK");
 
-            Preferences.Set("UserAlreadyloggedIn", true);
-            Application.Current.MainPage = new AppShell();
+                }
+            }
+           
 
+           
 
-
-            await Shell.Current.GoToAsync(state: "//DashboardPage");
 
         }
-
-
-
-
-
-
-
     }
 }
