@@ -15,19 +15,27 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
     public partial class SettingsViewModel: BaseViewModel
 
     {
-        private string webApiKey = "AIzaSyA3pj6EKCWmjtJN_LpVJd1MsmfSw9rWWKk";
-        int count = 0;
+        [ObservableProperty]
+        public  string serialNum;
+        
         [ObservableProperty]
         public bool changeDeviceId;
-        public UserModel User {  get; set; }
+       
         [ObservableProperty]
         public string buttonText;
+        public UserModel UserModel { get; set; }
+
+        int count = 0;
         public SettingsViewModel()
         {
             Title = "Settings";
-            User = new UserModel();
             ButtonText = "Change Device";
             ChangeDeviceId = false;
+            UserModel = new()
+            {
+                DeviceId = "12569HD1"
+            };
+            SerialNum = "Serial Num:" + UserModel.DeviceId;
         }
 
         [RelayCommand]
@@ -38,9 +46,9 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
                     Preferences.Set("UserAlreadyloggedIn", false);
                     Application.Current.MainPage = new LoginPage();
-                   // Preferences.Clear();
+                    Preferences.Clear();
 
-                    //await Shell.Current.GoToAsync(nameof(LoginPage));
+                    
             }
                 catch (Exception ex)
                 {
@@ -63,10 +71,11 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
 
             if(count== 2)
             {
-                if (User.DeviceId != null)
+                if (UserModel.DeviceId != null)
                 {
 
                     await App.Current.MainPage.DisplayAlert("Success", "Device ID Saved", "OK");
+                    SerialNum = "Serial Num:" + UserModel.DeviceId;
                     ButtonText = "Change Device";
                     ChangeDeviceId = false;
 

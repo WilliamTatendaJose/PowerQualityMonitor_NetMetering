@@ -53,7 +53,7 @@ namespace PowerQualityMonitor_NetMetering.ViewModels
                     if (token != null)
                         IsBusy = false;
                         await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
-                    await Navigation.PopAsync();
+                        await Navigation.PopAsync();
 
                 }
                 catch (Exception ex)

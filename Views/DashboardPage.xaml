@@ -190,8 +190,8 @@
 
                     </Grid>
                 </Frame>
-
-
+                
+                
                 <Grid Grid.Row="2" Padding="10">
                     <chart:SfCartesianChart>
                         <chart:SfCartesianChart.Title>

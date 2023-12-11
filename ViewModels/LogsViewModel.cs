@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PowerQualityMonitor_NetMetering.ViewModels
 {
-    internal class LogsViewModel
+    public partial class LogsViewModel: BaseViewModel
     {
+        public LogsViewModel() 
+        {
+            Title = "Logs";
+        }
     }
 }
